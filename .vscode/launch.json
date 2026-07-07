@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringtutorialApplication<springtutorial>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.unesp.rc.springtutorial.SpringtutorialApplication",
+            "projectName": "springtutorial",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

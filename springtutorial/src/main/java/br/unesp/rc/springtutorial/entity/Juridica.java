@@ -1,7 +1,5 @@
 package br.unesp.rc.springtutorial.entity;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -17,9 +15,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true, includeFieldNames = true)
 
-public class Juridica extends Pessoa implements Serializable{
+public class Juridica extends Pessoa{
     private static final long serialVersionUID = 1L;
-
+    
     @Column(name = "cnpj", unique = true)
     private String cnpj;
 

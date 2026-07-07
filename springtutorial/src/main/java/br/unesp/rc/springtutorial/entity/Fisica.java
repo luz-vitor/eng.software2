@@ -1,6 +1,5 @@
 package br.unesp.rc.springtutorial.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -20,8 +19,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = false, exclude = {"dataNascimento"})
 @ToString(callSuper = true, includeFieldNames = true)
 
-public class Fisica extends Pessoa implements Serializable{
-
+public class Fisica extends Pessoa{
     private static final long serialVersionUID = 1L;
     
     @Column(name = "cpf", unique = true)
