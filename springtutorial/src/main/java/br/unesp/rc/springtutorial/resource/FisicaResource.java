@@ -3,19 +3,20 @@ package br.unesp.rc.springtutorial.resource;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.unesp.rc.springtutorial.dto.FisicaDTO;
 import br.unesp.rc.springtutorial.dto.assember.FisicaAssember;
 import br.unesp.rc.springtutorial.entity.Fisica;
+import br.unesp.rc.springtutorial.entity.mapper.FisicaMapper;
 import br.unesp.rc.springtutorial.service.FisicaService;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -66,6 +67,22 @@ public class FisicaResource {
         return insert;
     }
     
+    @PutMapping("/")
+    public boolean update(@RequestBody FisicaDTO fisicaDTO){
+        boolean update = false;
 
+        Fisica newFisica = FisicaAssember.dtoToEntityModel(fisicaDTO);
+        Fisica fisicaUpdate = fisicaService.findByCpf(newFisica.getCpf());
+
+        FisicaMapper.update(fisicaUpdate, newFisica);
+
+        Fisica fisicaUpdated = fisicaService.update(fisicaUpdate);
+
+        if(fisicaUpdated != null){
+            update = true;
+        }
+
+        return update;
+    }
 
 }
