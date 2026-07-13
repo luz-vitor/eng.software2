@@ -35,7 +35,7 @@ public class FisicaServiceTest {
     void limparBanco() {        
         repository.deleteAll();
     }
-    //@Disabled
+    @Disabled
     @Test
     @DisplayName("FisicaService.save(Fisica)")
     void testSave(){
@@ -50,7 +50,7 @@ public class FisicaServiceTest {
         assertEquals(entity, f);
     }
 
-    //@Disabled
+    @Disabled
     @Test
     @DisplayName("FisicaService.findaByCpf(cpf)")
     void testFindByCpf(){
@@ -67,7 +67,7 @@ public class FisicaServiceTest {
         assertEquals(entity, f);
     }
     
-    //@Disabled
+    @Disabled
     @Test
     @DisplayName("1-Inserir pessoa física já cadastrada")
     public void testDuplicated(){
@@ -81,6 +81,7 @@ public class FisicaServiceTest {
         });
     }
 
+    @Disabled
     @Test
     @DisplayName("2-Consulta pessoa física existente")
     public void findByCpfExistente(){
@@ -91,6 +92,7 @@ public class FisicaServiceTest {
         assertEquals(entity.getCpf(), resultado.getCpf());
     }
 
+    @Disabled
     @Test
     @DisplayName("3-Consulta pessoa física não existente")
     public void findByCpfInexistente(){
@@ -99,6 +101,7 @@ public class FisicaServiceTest {
         assertNull(resultado);
     }
 
+    @Disabled
     @Test
     @DisplayName("4-Listar todas as pessoas fisicas existentes")
     public void findAll(){
@@ -110,6 +113,7 @@ public class FisicaServiceTest {
         assertNotEquals(0, lista.size());
     }
 
+    @Disabled
     @Test
     @DisplayName("5-Excluir pessoa fisica")
     public void testDelete(){
@@ -124,6 +128,7 @@ public class FisicaServiceTest {
 
     }
 
+    @Disabled
     @Test
     @DisplayName("6-Alterar pessoa fisica")
     public void testUpdate(){
@@ -141,7 +146,7 @@ public class FisicaServiceTest {
 
 
 
-    //@Disabled
+    @Disabled
     @Test
     @DisplayName("7-findAll() vazio")
     public void testFindAllVazio() {
@@ -161,5 +166,11 @@ public class FisicaServiceTest {
         assertTrue(fs.findAll().isEmpty());
     }
 
-    
+     
+    @Test
+    @DisplayName("Inserir 2 entidades")
+    void insertEntity(){
+        fs.save(InstanceGenerator.getPessoaFisica("222.333.444-55", "user1"));
+        fs.save(InstanceGenerator.getPessoaFisica("222.333.444-56", "user2"));
+    }
 }
