@@ -1,3 +1,13 @@
 spring:
   application:
     name: springtutorialmongodb
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      authentication-database: admin
+      username: admin
+      password: password
+      database: springtutorialmongodb
+      uri: mongodb://admin:password@localhost:27017/springtutorialmongodb?authSource=admin
