@@ -17,6 +17,11 @@ import br.unesp.rc.springtutorial.dto.assember.FisicaAssember;
 import br.unesp.rc.springtutorial.entity.Fisica;
 import br.unesp.rc.springtutorial.entity.mapper.FisicaMapper;
 import br.unesp.rc.springtutorial.service.FisicaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 
@@ -32,6 +37,19 @@ public class FisicaResource {
     public List<Fisica> getAllFisica(){
         return fisicaService.findAll();
     }
+
+    @Operation(summary = "Retorna uma pessoa pelo CPF")
+    @ApiResponses(
+        value = {
+            @ApiResponse(responseCode = "200", description = "Pessoa-física encontrada!",
+                content = @Content(mediaType = "application/json",schema = @Schema(implementation = Fisica.class))
+            ),
+            
+            @ApiResponse(responseCode = "400", description = "CPF inválido!", content = @Content),
+
+            @ApiResponse(responseCode = "404", description = "Pessoa-física não encontrada!", content = @Content)
+        }
+    )
 
     @GetMapping("/{cpf}")
     public Fisica getFisicaByCpFisica(@PathVariable(value = "cpf") String cpf) {
