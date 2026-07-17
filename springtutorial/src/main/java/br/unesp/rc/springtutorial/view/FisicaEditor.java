@@ -27,10 +27,12 @@ public class FisicaEditor extends VerticalLayout {
 
     private ChangeHandler changeHandler;
 
-
     public FisicaEditor(FisicaService service) {
 
         this.service = service;
+        cpf.setPattern("[0-9]*");
+        cpf.setAllowedCharPattern("[0-9]");
+        cpf.setPlaceholder("Somente números");
 
         add(
             nome,
@@ -58,7 +60,11 @@ public class FisicaEditor extends VerticalLayout {
 
         service.save(fisica);
 
-        changeHandler.onChange();
+        editar(null);
+
+        if (changeHandler != null) {
+            changeHandler.onChange();
+        }
     }
 
 
@@ -66,7 +72,11 @@ public class FisicaEditor extends VerticalLayout {
 
         service.delete(fisica);
 
-        changeHandler.onChange();
+        editar(null);
+
+        if (changeHandler != null) {
+            changeHandler.onChange();
+        }
     }
 
 
