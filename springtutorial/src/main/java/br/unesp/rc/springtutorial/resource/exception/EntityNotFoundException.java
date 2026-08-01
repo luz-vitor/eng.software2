@@ -2,12 +2,12 @@ package br.unesp.rc.springtutorial.resource.exception;
 
 public class EntityNotFoundException extends RuntimeException {
 
-    public EntityNotFoundException(){
+    public EntityNotFoundException() {
 
     }
 
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return super.getMessage();
     }
 

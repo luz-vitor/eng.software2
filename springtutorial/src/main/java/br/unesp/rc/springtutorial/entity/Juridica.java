@@ -15,13 +15,13 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true, includeFieldNames = true)
 
-public class Juridica extends Pessoa{
+public class Juridica extends Pessoa {
     private static final long serialVersionUID = 1L;
-    
+
     @Column(name = "cnpj", unique = true)
     private String cnpj;
 
-    public Juridica(){
+    public Juridica() {
 
     }
 

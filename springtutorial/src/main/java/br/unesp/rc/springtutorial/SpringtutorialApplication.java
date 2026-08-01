@@ -12,8 +12,8 @@ public class SpringtutorialApplication {
 
 	// @Override
 	// public void run(String... args) throws Exception {
-	// 	Fisica entity = InstanceGenerator.getPessoaFisica("111.222.333-44", "user1");
-	// 	System.out.println("\n" + entity + "\n");
+	// Fisica entity = InstanceGenerator.getPessoaFisica("111.222.333-44", "user1");
+	// System.out.println("\n" + entity + "\n");
 	// }
 
 }

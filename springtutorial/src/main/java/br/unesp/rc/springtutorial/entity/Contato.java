@@ -17,7 +17,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 
-public class Contato implements Serializable{
+public class Contato implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -29,7 +29,7 @@ public class Contato implements Serializable{
     private String celular;
     private String email;
 
-    public Contato(){
-        
+    public Contato() {
+
     }
 }

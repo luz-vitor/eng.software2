@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.unesp.rc.springtutorial.dto.FisicaDTO;
-import br.unesp.rc.springtutorial.dto.assember.FisicaAssember;
+import br.unesp.rc.springtutorial.dto.assembler.FisicaAssember;
 import br.unesp.rc.springtutorial.entity.Fisica;
 import br.unesp.rc.springtutorial.entity.mapper.FisicaMapper;
 import br.unesp.rc.springtutorial.service.FisicaService;
@@ -23,48 +23,41 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
-
-
-
 @RestController
-@RequestMapping("/entidade/v1")
-public class FisicaResource {
-    
+@RequestMapping("/pessoas-fisicas")
+public class FisicaController {
+
     @Autowired
     private FisicaService fisicaService;
 
     @GetMapping("/")
-    public List<Fisica> getAllFisica(){
+    public List<Fisica> getAllFisica() {
         return fisicaService.findAll();
     }
 
     @Operation(summary = "Retorna uma pessoa pelo CPF")
-    @ApiResponses(
-        value = {
-            @ApiResponse(responseCode = "200", description = "Pessoa-física encontrada!",
-                content = @Content(mediaType = "application/json",schema = @Schema(implementation = Fisica.class))
-            ),
-            
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Pessoa-física encontrada!", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Fisica.class))),
+
             @ApiResponse(responseCode = "400", description = "CPF inválido!", content = @Content),
 
             @ApiResponse(responseCode = "404", description = "Pessoa-física não encontrada!", content = @Content)
-        }
-    )
+    })
 
     @GetMapping("/{cpf}")
     public Fisica getFisicaByCpFisica(@PathVariable(value = "cpf") String cpf) {
         Fisica fisica = fisicaService.findByCpf(cpf);
-        
+
         return fisica;
     }
 
     @DeleteMapping("/{cpf}")
-    public boolean delete(@PathVariable(value = "cpf") String cpf){
+    public boolean delete(@PathVariable(value = "cpf") String cpf) {
         boolean delete = false;
 
         Fisica fisicaDelete = fisicaService.findByCpf(cpf);
 
-        if(fisicaDelete != null){
+        if (fisicaDelete != null) {
             fisicaService.delete(fisicaDelete);
             delete = true;
         }
@@ -78,15 +71,15 @@ public class FisicaResource {
 
         Fisica fisica = FisicaAssember.dtoToEntityModel(fisicaDTO);
         Fisica fisicaInsert = fisicaService.save(fisica);
-        if(fisicaInsert != null){
+        if (fisicaInsert != null) {
             insert = true;
         }
 
         return insert;
     }
-    
+
     @PutMapping("/")
-    public boolean update(@RequestBody FisicaDTO fisicaDTO){
+    public boolean update(@RequestBody FisicaDTO fisicaDTO) {
         boolean update = false;
 
         Fisica newFisica = FisicaAssember.dtoToEntityModel(fisicaDTO);
@@ -96,7 +89,7 @@ public class FisicaResource {
 
         Fisica fisicaUpdated = fisicaService.update(fisicaUpdate);
 
-        if(fisicaUpdated != null){
+        if (fisicaUpdated != null) {
             update = true;
         }
 

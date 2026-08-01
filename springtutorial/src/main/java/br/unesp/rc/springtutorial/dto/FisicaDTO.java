@@ -1,6 +1,6 @@
 package br.unesp.rc.springtutorial.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -25,14 +25,14 @@ public class FisicaDTO {
     private String nome;
     private String cpf;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     private List<EnderecoDTO> endereco;
 
     public FisicaDTO(){}
 
     public FisicaDTO(String usuario, String senha, String telefoneResidencial, 
         String telefoneComercial, String celular, String email, String nome, 
-        String cpf, Date dataNascimento, List<EnderecoDTO> endereco){
+        String cpf, LocalDate dataNascimento, List<EnderecoDTO> endereco){
             this.usuario = usuario;
             this.senha = senha;
             this.telefoneResidencial = telefoneResidencial;
@@ -43,6 +43,6 @@ public class FisicaDTO {
             this.cpf = cpf;
             this.dataNascimento = dataNascimento;
             this.endereco = endereco;
-        }
+    }
 
 }

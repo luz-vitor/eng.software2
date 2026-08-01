@@ -17,13 +17,13 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 
-public class Endereco implements Serializable{
+public class Endereco implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idEndereco;
-    
+
     private String rua;
     private int numero;
     private String bairro;
@@ -31,7 +31,7 @@ public class Endereco implements Serializable{
     private String cidade;
     private String estado;
 
-    public Endereco(){
+    public Endereco() {
 
     }
 

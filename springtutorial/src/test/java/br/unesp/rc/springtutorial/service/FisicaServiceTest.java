@@ -14,7 +14,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import br.unesp.rc.springtutorial.entity.Fisica;
 import br.unesp.rc.springtutorial.repository.FisicaRepository;
@@ -22,7 +21,7 @@ import br.unesp.rc.springtutorial.utils.InstanceGenerator;
 
 @SpringBootTest
 public class FisicaServiceTest {
-    
+
     private Fisica entity;
 
     @Autowired
@@ -32,13 +31,14 @@ public class FisicaServiceTest {
     private FisicaRepository repository;
 
     @BeforeEach
-    void limparBanco() {        
+    void limparBanco() {
         repository.deleteAll();
     }
+
     @Disabled
     @Test
     @DisplayName("FisicaService.save(Fisica)")
-    void testSave(){
+    void testSave() {
         entity = InstanceGenerator.getPessoaFisica("222.333.444-55", "user2");
         System.out.println(entity);
 
@@ -53,11 +53,11 @@ public class FisicaServiceTest {
     @Disabled
     @Test
     @DisplayName("FisicaService.findaByCpf(cpf)")
-    void testFindByCpf(){
+    void testFindByCpf() {
         entity = InstanceGenerator.getPessoaFisica("222.333.444-55", "user1");
         fs.save(entity);
 
-        Fisica f = fs.findByCpf( "222.333.444-55");
+        Fisica f = fs.findByCpf("222.333.444-55");
         System.out.println("----------------------------------------");
         System.out.println("Resultado do findByCPF:");
         System.out.println("----------------------------------------");
@@ -66,17 +66,17 @@ public class FisicaServiceTest {
 
         assertEquals(entity, f);
     }
-    
+
     @Disabled
     @Test
     @DisplayName("1-Inserir pessoa física já cadastrada")
-    public void testDuplicated(){
+    public void testDuplicated() {
         Fisica f1 = InstanceGenerator.getPessoaFisica("222.333.444-55", "user1");
         Fisica f2 = InstanceGenerator.getPessoaFisica("222.333.444-55", "user2");
-       
+
         fs.save(f1);
 
-        assertThrows(IllegalArgumentException.class,()-> {
+        assertThrows(IllegalArgumentException.class, () -> {
             fs.save(f2);
         });
     }
@@ -84,7 +84,7 @@ public class FisicaServiceTest {
     @Disabled
     @Test
     @DisplayName("2-Consulta pessoa física existente")
-    public void findByCpfExistente(){
+    public void findByCpfExistente() {
         entity = InstanceGenerator.getPessoaFisica("123.452.000-13", "userTest");
         fs.save(entity);
 
@@ -95,7 +95,7 @@ public class FisicaServiceTest {
     @Disabled
     @Test
     @DisplayName("3-Consulta pessoa física não existente")
-    public void findByCpfInexistente(){
+    public void findByCpfInexistente() {
         Fisica resultado = fs.findByCpf("999.999.999-55");
 
         assertNull(resultado);
@@ -104,7 +104,7 @@ public class FisicaServiceTest {
     @Disabled
     @Test
     @DisplayName("4-Listar todas as pessoas fisicas existentes")
-    public void findAll(){
+    public void findAll() {
         fs.save(InstanceGenerator.getPessoaFisica("111.111.111-11", "João"));
         fs.save(InstanceGenerator.getPessoaFisica("222.222.222-22", "Maria"));
 
@@ -116,14 +116,14 @@ public class FisicaServiceTest {
     @Disabled
     @Test
     @DisplayName("5-Excluir pessoa fisica")
-    public void testDelete(){
+    public void testDelete() {
         entity = InstanceGenerator.getPessoaFisica("333.333.333-33", "Carlos");
         fs.save(entity);
 
         fs.delete(entity);
 
         Fisica resultado = fs.findByCpf(entity.getCpf());
-        
+
         assertNull(resultado);
 
     }
@@ -131,20 +131,18 @@ public class FisicaServiceTest {
     @Disabled
     @Test
     @DisplayName("6-Alterar pessoa fisica")
-    public void testUpdate(){
+    public void testUpdate() {
         entity = InstanceGenerator.getPessoaFisica("444.444.444-44", "Jose");
         fs.save(entity);
 
         entity = fs.findByCpf("444.444.444-44");
-        
+
         entity.setNome("Jose da Silva");
-        
+
         Fisica atualizado = fs.update(entity);
 
         assertEquals("Jose da Silva", atualizado.getNome());
     }
-
-
 
     @Disabled
     @Test
@@ -154,22 +152,21 @@ public class FisicaServiceTest {
         // List<Fisica> lista = fs.findAll();
 
         // for (Fisica f : lista) {
-        //     fs.delete(f);
+        // fs.delete(f);
         // }
 
         // lista = fs.findAll();
 
         // assertEquals(0, lista.size());
 
-        //ou
+        // ou
 
         assertTrue(fs.findAll().isEmpty());
     }
 
-     
     @Test
     @DisplayName("Inserir 2 entidades")
-    void insertEntity(){
+    void insertEntity() {
         fs.save(InstanceGenerator.getPessoaFisica("222.333.444-55", "user1"));
         fs.save(InstanceGenerator.getPessoaFisica("222.333.444-56", "user2"));
     }

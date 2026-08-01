@@ -1,4 +1,4 @@
-package br.unesp.rc.springtutorial.dto.assember;
+package br.unesp.rc.springtutorial.dto.assembler;
 
 import br.unesp.rc.springtutorial.dto.EnderecoDTO;
 import br.unesp.rc.springtutorial.dto.FisicaDTO;
@@ -8,9 +8,10 @@ import br.unesp.rc.springtutorial.entity.Endereco;
 import br.unesp.rc.springtutorial.entity.Fisica;
 
 public class FisicaAssember {
-    private FisicaAssember(){}
+    private FisicaAssember() {
+    }
 
-    public static Fisica dtoToEntityModel(FisicaDTO dto){
+    public static Fisica dtoToEntityModel(FisicaDTO dto) {
         Fisica fisica = new Fisica();
 
         fisica.setCpf(dto.getCpf());
@@ -23,14 +24,14 @@ public class FisicaAssember {
         fisica.setAcesso(a);
 
         Contato c = new Contato();
-        
+
         c.setTelefoneResidencial(dto.getTelefoneResidencial());
         c.setTelefoneComercial(dto.getTelefoneComercial());
         c.setCelular(dto.getCelular());
         c.setEmail(dto.getEmail());
         fisica.setContato(c);
 
-        for(EnderecoDTO edto : dto.getEndereco()){
+        for (EnderecoDTO edto : dto.getEndereco()) {
             Endereco e = new Endereco();
             e.setRua(edto.getRua());
             e.setNumero(edto.getNumero());

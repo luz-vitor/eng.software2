@@ -2,240 +2,238 @@
 <html lang="pt-BR">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Spring Tutorial API</title>
+    <title>Spring Tutorial API</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-<style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:40px;
-}
+        .container {
 
-.container{
+            width: 100%;
+            max-width: 1100px;
 
-    width:100%;
-    max-width:1100px;
+            background: white;
+            border-radius: 20px;
 
-    background:white;
-    border-radius:20px;
+            overflow: hidden;
 
-    overflow:hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .25);
 
-    box-shadow:0 20px 60px rgba(0,0,0,.25);
+        }
 
-}
+        header {
 
-header{
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
 
-    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+            color: white;
 
-    color:white;
+            text-align: center;
 
-    text-align:center;
+            padding: 50px 30px;
 
-    padding:50px 30px;
+        }
 
-}
+        header h1 {
 
-header h1{
+            font-size: 2.3rem;
+            margin-bottom: 10px;
 
-    font-size:2.3rem;
-    margin-bottom:10px;
+        }
 
-}
+        header p {
 
-header p{
+            opacity: .9;
 
-    opacity:.9;
+        }
 
-}
+        .cards {
 
-.cards{
+            display: grid;
 
-    display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap: 30px;
 
-    gap:30px;
+            padding: 40px;
 
-    padding:40px;
+        }
 
-}
+        .card {
 
-.card{
+            border-radius: 15px;
 
-    border-radius:15px;
+            padding: 30px;
 
-    padding:30px;
+            border: 1px solid #e5e7eb;
 
-    border:1px solid #e5e7eb;
+            transition: .3s;
 
-    transition:.3s;
+            background: #fafafa;
 
-    background:#fafafa;
+        }
 
-}
+        .card:hover {
 
-.card:hover{
+            transform: translateY(-8px);
 
-    transform:translateY(-8px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, .15);
 
-    box-shadow:0 15px 35px rgba(37,99,235,.15);
+        }
 
-}
+        .card h2 {
 
-.card h2{
+            color: #2563eb;
 
-    color:#2563eb;
+            margin-bottom: 15px;
 
-    margin-bottom:15px;
+            font-size: 1.5rem;
 
-    font-size:1.5rem;
+        }
 
-}
+        .card p {
 
-.card p{
+            color: #555;
 
-    color:#555;
+            line-height: 1.6;
 
-    line-height:1.6;
+            margin-bottom: 25px;
 
-    margin-bottom:25px;
+        }
 
-}
+        .button {
 
-.button{
+            display: inline-block;
 
-    display:inline-block;
+            background: #2563eb;
 
-    background:#2563eb;
+            color: white;
 
-    color:white;
+            padding: 12px 22px;
 
-    padding:12px 22px;
+            border-radius: 8px;
 
-    border-radius:8px;
+            text-decoration: none;
 
-    text-decoration:none;
+            font-weight: 600;
 
-    font-weight:600;
+            transition: .3s;
 
-    transition:.3s;
+        }
 
-}
+        .button:hover {
 
-.button:hover{
+            background: #1d4ed8;
 
-    background:#1d4ed8;
+            transform: scale(1.03);
 
-    transform:scale(1.03);
+        }
 
-}
+        footer {
 
-footer{
+            background: #f5f5f5;
 
-    background:#f5f5f5;
+            text-align: center;
 
-    text-align:center;
+            padding: 20px;
 
-    padding:20px;
+            color: #777;
 
-    color:#777;
+            font-size: .9rem;
 
-    font-size:.9rem;
-
-}
-
-</style>
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<header>
+        <header>
 
-<h1>🚀 Spring Tutorial API</h1>
+            <h1>🚀 Spring Tutorial API</h1>
 
-<p>Documentação OpenAPI, Swagger UI e CRUD em Vaadin</p>
+            <p>Documentação OpenAPI, Swagger UI e CRUD em Vaadin</p>
 
-</header>
+        </header>
 
-<div class="cards">
+        <div class="cards">
 
-<div class="card">
+            <div class="card">
 
-<h2>📄 API Docs</h2>
+                <h2>📄 API Docs</h2>
 
-<p>
-Visualize a especificação OpenAPI em formato JSON gerada automaticamente pelo Spring Boot.
-</p>
+                <p>
+                    Visualize a especificação OpenAPI em formato JSON gerada automaticamente pelo Spring Boot.
+                </p>
 
-<a class="button"
-href="http://localhost:8084/api-docs">
-Abrir API Docs
-</a>
+                <a class="button" href="/api-docs">
+                    Abrir API Docs
+                </a>
 
-</div>
+            </div>
 
-<div class="card">
+            <div class="card">
 
-<h2>📚 Swagger UI</h2>
+                <h2>📚 Swagger UI</h2>
 
-<p>
-Explore todos os endpoints da API diretamente pelo navegador utilizando a interface Swagger.
-</p>
+                <p>
+                    Explore todos os endpoints da API diretamente pelo navegador utilizando a interface Swagger.
+                </p>
 
-<a class="button"
-href="http://localhost:8084/swagger-ui/index.html">
-Abrir Swagger UI
-</a>
+                <a class="button" href="/swagger-ui-entity.html">
+                    Abrir Swagger UI
+                </a>
 
-</div>
+            </div>
 
-<div class="card">
+            <div class="card">
 
-<h2>🗂 CRUD Vaadin</h2>
+                <h2>🗂 CRUD Vaadin</h2>
 
-<p>
-Acesse a interface desenvolvida em Vaadin para realizar operações de cadastro, edição, consulta e exclusão.
-</p>
+                <p>
+                    Acesse a interface desenvolvida em Vaadin para realizar operações de cadastro, edição, consulta e
+                    exclusão.
+                </p>
 
-<a class="button"
-href="http://localhost:8084/app/view">
-Abrir CRUD
-</a>
+                <a class="button" href="/app/">
+                    Abrir CRUD
+                </a>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-<footer>
+        <footer>
 
-Spring Boot • Springdoc OpenAPI • Swagger • Vaadin
+            Spring Boot • Springdoc OpenAPI • Swagger • Vaadin
 
-</footer>
+        </footer>
 
-</div>
+    </div>
 
 </body>
+
 </html>

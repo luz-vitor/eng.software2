@@ -15,16 +15,16 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 
-public class Acesso implements Serializable{
+public class Acesso implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     @Column(name = "acesso_usuario", unique = true)
     private String usuario;
 
     @Column(name = "acesso_senha")
     private String senha;
 
-    public Acesso(){
+    public Acesso() {
     }
 
 }

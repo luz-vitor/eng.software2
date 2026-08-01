@@ -1,6 +1,6 @@
 package br.unesp.rc.springtutorial.utils;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import br.unesp.rc.springtutorial.entity.Acesso;
 import br.unesp.rc.springtutorial.entity.Contato;
@@ -8,29 +8,29 @@ import br.unesp.rc.springtutorial.entity.Endereco;
 import br.unesp.rc.springtutorial.entity.Fisica;
 
 public class InstanceGenerator {
-    private InstanceGenerator(){
+    private InstanceGenerator() {
 
     }
 
-    public static Fisica getPessoaFisica(String cpf, String user){
+    public static Fisica getPessoaFisica(String cpf, String user) {
         Fisica f = new Fisica();
-        
+
         f.setCpf(cpf);
-        f.setDataNascimento(new Date());
+        f.setDataNascimento(LocalDate.now());
         f.setNome("Juca Chaves");
-        
+
         Acesso a = new Acesso();
         a.setUsuario(user);
         a.setSenha("deitel");
         f.setAcesso(a);
-    
+
         Contato c = new Contato();
         c.setTelefoneResidencial("3333-4444");
         c.setTelefoneComercial("3333-5555");
         c.setCelular("98888-7777");
         c.setEmail("juca@chaves.com.br");
         f.setContato(c);
-    
+
         Endereco e1 = new Endereco();
         e1.setRua("Avenida 24A");
         e1.setNumero(1515);
@@ -38,7 +38,7 @@ public class InstanceGenerator {
         e1.setCep("13506-900");
         e1.setCidade("Rio Claro");
         e1.setEstado("SP");
-        
+
         Endereco e2 = new Endereco();
         e2.setRua("Avenida 24A");
         e2.setNumero(2020);

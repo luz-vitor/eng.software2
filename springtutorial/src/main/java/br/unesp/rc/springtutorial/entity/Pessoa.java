@@ -22,28 +22,25 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity(name="Pessoa")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Entity(name = "Pessoa")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 
-public class Pessoa implements Serializable{
+public class Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idPessoa;
-    
+
     @NotBlank
     @Size(min = 0, max = 50)
     private String nome;
 
-    @OneToMany(
-        cascade=CascadeType.ALL, 
-        orphanRemoval=true, 
-        fetch=FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "pessoa_idpessoa")
     private List<Endereco> endereco;
 
@@ -56,7 +53,7 @@ public class Pessoa implements Serializable{
     public Pessoa() {
         this.endereco = new ArrayList<>();
     }
-    
+
     public void setEndereco(Endereco endereco) {
         this.endereco.add(endereco);
     }

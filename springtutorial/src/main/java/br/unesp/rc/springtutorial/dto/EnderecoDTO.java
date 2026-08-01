@@ -18,9 +18,10 @@ public class EnderecoDTO {
     private String cidade;
     private String estado;
 
-    public EnderecoDTO(){}
+    public EnderecoDTO() {
+    }
 
-    public EnderecoDTO(String rua, int numero, String bairro, String cep, String cidade, String estado){
+    public EnderecoDTO(String rua, int numero, String bairro, String cep, String cidade, String estado) {
         this.rua = rua;
         this.numero = numero;
         this.bairro = bairro;
@@ -28,6 +29,5 @@ public class EnderecoDTO {
         this.cidade = cidade;
         this.estado = estado;
     }
-
 
 }
