@@ -5,10 +5,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import br.unesp.rc.springtutorial.entity.EventoAuditoria;
+import br.unesp.rc.springtutorial.repository.EventoAuditoriaRepository;
+
 @Component
 public class AuditoriaListener {
 
     private static final Logger log = LoggerFactory.getLogger(AuditoriaListener.class);
+
+    private final EventoAuditoriaRepository repository;
+
+    public AuditoriaListener(EventoAuditoriaRepository repository) {
+        this.repository = repository;
+    }
 
     @RabbitListener(queues = RabbitConfig.QUEUE_AUDITORIA)
     public void receber(PessoaEvent evento) {
@@ -18,11 +27,14 @@ public class AuditoriaListener {
             throw new IllegalStateException("Falha simulada no processamento da auditoria");
         }
 
-        log.info("[AUDITORIA] tipo={} acao={} documento={} nome={} em={}",
-                evento.tipo(),
-                evento.acao(),
-                evento.documento(),
-                evento.nome(),
-                evento.ocorridoEm());
+        EventoAuditoria registro = repository.save(EventoAuditoria.de(evento));
+
+        log.info("[AUDITORIA] tipo={} acao={} documento={} nome={}",
+                registro.getTipo(),
+                registro.getAcao(),
+                registro.getDocumento(),
+                registro.getNome());
+
+        AuditoriaBroadcaster.publicar(registro);
     }
 }

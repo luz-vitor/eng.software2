@@ -10,11 +10,36 @@ public record PessoaEvent(
         Instant ocorridoEm) {
 
     public enum TipoPessoa {
-        FISICA, JURIDICA
+
+        FISICA("física"),
+        JURIDICA("jurídica");
+
+        private final String rotulo;
+
+        TipoPessoa(String rotulo) {
+            this.rotulo = rotulo;
+        }
+
+        public String getRotulo() {
+            return rotulo;
+        }
     }
 
     public enum Acao {
-        CRIADA, ATUALIZADA, REMOVIDA
+
+        CRIADA("criada"),
+        ATUALIZADA("atualizada"),
+        REMOVIDA("removida");
+
+        private final String rotulo;
+
+        Acao(String rotulo) {
+            this.rotulo = rotulo;
+        }
+
+        public String getRotulo() {
+            return rotulo;
+        }
     }
 
     public static PessoaEvent de(TipoPessoa tipo, Acao acao, String documento, String nome) {
