@@ -2,70 +2,81 @@ package br.unesp.rc.springtutorial.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.unesp.rc.springtutorial.entity.Fisica;
+import br.unesp.rc.springtutorial.messaging.PessoaEvent;
 import br.unesp.rc.springtutorial.repository.FisicaRepository;
 
-@Component
+@Service
 public class FisicaService {
 
-    @Autowired
-    private FisicaRepository repository;
+    private final FisicaRepository repository;
+    private final ApplicationEventPublisher eventos;
 
-    public FisicaService() {
+    public FisicaService(FisicaRepository repository,
+            ApplicationEventPublisher eventos) {
 
+        this.repository = repository;
+        this.eventos = eventos;
     }
 
+    @Transactional
     public Fisica save(Fisica entity) {
+
+        boolean novo = entity.getIdPessoa() == 0;
+
         Fisica existente = repository.findByCpf(entity.getCpf());
+
         if (existente != null &&
                 existente.getIdPessoa() != entity.getIdPessoa()) {
 
             throw new IllegalArgumentException("CPF já cadastrado");
         }
 
-        return repository.save(entity);
+        Fisica salvo = repository.save(entity);
+
+        eventos.publishEvent(PessoaEvent.de(
+                PessoaEvent.TipoPessoa.FISICA,
+                novo ? PessoaEvent.Acao.CRIADA : PessoaEvent.Acao.ATUALIZADA,
+                salvo.getCpf(),
+                salvo.getNome()));
+
+        return salvo;
     }
 
     public Fisica findByCpf(String cpf) {
-        Fisica insertedEntity = null;
-
-        if (repository != null) {
-            insertedEntity = repository.findByCpf(cpf);
-        }
-
-        return insertedEntity;
+        return repository.findByCpf(cpf);
     }
 
+    @Transactional
     public void delete(Fisica entity) {
 
-        if (repository != null) {
-            repository.delete(entity);
-        }
+        repository.delete(entity);
+
+        eventos.publishEvent(PessoaEvent.de(
+                PessoaEvent.TipoPessoa.FISICA,
+                PessoaEvent.Acao.REMOVIDA,
+                entity.getCpf(),
+                entity.getNome()));
     }
 
+    @Transactional
     public Fisica update(Fisica entity) {
-        Fisica persistedEntity = null;
 
-        if (repository != null) {
-            persistedEntity = repository.save(entity);
-        }
+        Fisica persistido = repository.save(entity);
 
-        return persistedEntity;
+        eventos.publishEvent(PessoaEvent.de(
+                PessoaEvent.TipoPessoa.FISICA,
+                PessoaEvent.Acao.ATUALIZADA,
+                persistido.getCpf(),
+                persistido.getNome()));
+
+        return persistido;
     }
 
-    // public List<Fisica> findAll(){
-    // List<Fisica> list = null;
-
-    // if(repository != null){
-    // list = new ArrayList<>();
-    // list = repository.findAll();
-    // }
-
-    // return list;
-    // }
     public List<Fisica> findAll() {
         return repository.findAll();
     }
